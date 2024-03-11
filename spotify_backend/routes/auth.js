@@ -1,7 +1,7 @@
 const express=require("express");
 const router=express.Router();
 const User = require("../models/User");
-const bcrypt=require("bcrypt");
+const bcrypt=require("bcryptjs");
 const {getToken} = require("../utils/helpers");
 // we did not only called express because we do not need all the functionalities but we only need functionalities realted to routing;
 
