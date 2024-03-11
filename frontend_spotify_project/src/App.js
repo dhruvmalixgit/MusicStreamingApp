@@ -20,7 +20,7 @@ function App() {
     {cookie.token ? ( 
       <songContext.Provider value={{currentSong,setCurrentSong,soundPlayed,setSoundPlayed,isPaused,setIsPaused}}>
       <Routes>
-        <Route path="/" element={<div>hello</div>} />
+        <Route path="/" element={<LoggedInHomeComponent/>}/>
         <Route path="/home" element={<LoggedInHomeComponent/>}/>
         <Route path="/uploadSong" element={<UploadSong/>}/>  
         <Route path="/myMusic" element={<MyMusic/>}/>   
