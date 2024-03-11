@@ -40,22 +40,57 @@ mongoose.connect("mongodb+srv://dhruv1212malik:"+process.env.MONGO_PASSWORD+"@cl
 let opts = {};
 opts.jwtFromRequest = ExtractJwt.fromAuthHeaderAsBearerToken();
 opts.secretOrKey = "asdfghjkl"; 
-passport.use(
-    new JwtStrategy(opts, function (jwt_payload, done) {
-        User.findOne({_id: jwt_payload.identifier}, function (err, user) {
-            // done(error, doesTheUserExist)
-            if (err) {
-                return done(err, false);
-            }
-            if (user) {
-                return done(null, user);
-            } else {
-                return done(null, false);
-                // or you could create a new account
-            }
-        });
-    })
-);
+//-------------------------------------------------------------------------
+// passport.use(
+//     new JwtStrategy(opts, function (jwt_payload, done) {
+//         User.findOne({_id: jwt_payload.identifier}, function (err, user) {
+//             // done(error, doesTheUserExist)
+//             if (err) {
+//                 return done(err, false);
+//             }
+//             if (user) {
+//                 return done(null, user);
+//             } else {
+//                 return done(null, false);
+//                 // or you could create a new account
+//             }
+//         });
+//     })
+// );
+//--------------------------------------------------------------------------
+
+passport.use(new JwtStrategy(opts, async function(jwt_payload, done) {
+    // // User.findOne({id: jwt_payload.sub}, function(err, user) {  //with this, all songs from all the diff users will be created under single user only (and this is an issue)
+    //     User.findOne({_id: jwt_payload.identifier}, function(err, user) {  // this will fix the above issue, each different songs by diff users will be listed under their individual 'mySongs' route only
+
+    //     // in login
+    //     // done(error, isUserExists)
+
+    //     if (err) {   // if error found, then 'jwt tocken not matched', try to login again
+    //         return done(err, false);
+    //     }
+    //     if (user) {  // user found, jwt matched, user logged in 
+    //         return done(null, user);
+    //     } else {
+    //         return done(null, false);  // no error, no user, so create new account
+    //         // or you could create a new account
+    //     }
+    // });
+    try{
+        const user = await User.findOne({_id: jwt_payload.identifier});
+
+        // in login
+        // done(error, isUserExists)
+        if(user){
+            return done(null, user);
+        }
+        else {
+            return done(null, false);
+        }
+    }catch(error){
+        return done(error, false);
+    }
+}));
 // we have made a secret key and we havve put that into our env file;
 //not mandatory thats why commenting 2 ines below
 // opts.issuer = 'accounts.examplesoft.com';
