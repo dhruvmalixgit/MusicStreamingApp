@@ -1,0 +1,1 @@
+export const cloudinary_upload_preset="eds1pgp7";
