@@ -1,1 +1,1 @@
-export const backendurl="http://localhost:8000";
+export const backendurl="https://harmonix-backend.vercel.app";
