@@ -117,7 +117,8 @@ const LoggedInContainer = ({children,currentActiveScreen}) =>{
                     <IconText 
                         iconName={"zondicons:add-outline"}
                         displayText={"Create Playlist"}
-                        onClick={()=>{setCreatePlaylistModalOpen(true)}}
+                        onClick={()=>{console.log("open playlist")}}
+                        // onClick={()=>{setCreatePlaylistModalOpen(true)}}
                     />
                     <IconText 
                         iconName={"icon-park-twotone:like"}
