@@ -9,7 +9,7 @@ import MyMusic from "./routes/MyMusic";
 import songContext from "./context/songContext";
 import { useState } from "react";
 import SearchPage from "./routes/SearchPage";
-import Library from "./routes/library";
+import Library from "./routes/Library";
 function App() {
   const[soundPlayed,setSoundPlayed]=useState(null);
   const[isPaused,setIsPaused] = useState(true);
