@@ -10,6 +10,9 @@ import LogoutButton from '../routes/LogOut';
 
 const LoggedInContainer = ({children,currentActiveScreen}) =>{
 
+    const [createPlaylistModalOpen, setCreatePlaylistModalOpen] = useState(false);
+    const [addToPlaylistModalOpen, setAddToPlaylistModalOpen] = useState(false);
+
     const{currentSong,setCurrentSong,soundPlayed,setSoundPlayed,isPaused,setIsPaused}=useContext(songContext);
 
     const firstUpdate = useRef(true);
@@ -23,6 +26,17 @@ const LoggedInContainer = ({children,currentActiveScreen}) =>{
         }
         changeSong(currentSong.track)
     },[currentSong&&currentSong.track]);
+
+    const addSongToPlaylist = async (playlistId) => {
+        const songId = currentSong._id;
+
+        const payload = {playlistId, songId};
+        const response = await makeAuthenticatedPOSTRequest("/playlist/add/song", payload);
+        
+        if(response._id){
+            setAddToPlaylistModalOpen(false);
+        }
+    }
 
     const playSound=()=>{
         if(!soundPlayed){
@@ -58,6 +72,12 @@ const LoggedInContainer = ({children,currentActiveScreen}) =>{
     return (
         <div className="h-full w-full bg-app-black ">
             {/*this div will be left pannel*/}
+
+            {createPlaylistModalOpen && <CreatePlaylistModal
+                closeModal={()=>{setCreatePlaylistModalOpen(false);}}/>}
+                {addToPlaylistModalOpen && <AddToPlaylistModal closeModal={()=>{setAddToPlaylistModalOpen(false);}}
+                addSongToPlaylist={addSongToPlaylist}/>}
+
             <div className={`${currentSong?"h-9/10":"h-full"} w-full flex`}>
             <div className="h-full w-1/5 bg-black flex flex-col justify-between">
             <div>
@@ -93,6 +113,7 @@ const LoggedInContainer = ({children,currentActiveScreen}) =>{
                     <IconText 
                         iconName={"zondicons:add-outline"}
                         displayText={"Create Playlist"}
+                        onClick={()=>{setCreatePlaylistModalOpen(true)}}
                     />
                     <IconText 
                         iconName={"icon-park-twotone:like"}
@@ -123,7 +144,7 @@ const LoggedInContainer = ({children,currentActiveScreen}) =>{
                         
                         <div className='w-2/5 flex justify-around h-full items-center'>
                         <TextWithHover targetLink={"/uploadSong"} displayText={"Upload Song"}/>
-                        <div className='bg-white h-2/3 px-8 flex items-center justify-center rounded-full font-semibold cursor-pointer'>DM</div>
+                        
                         </div>
 
                         <LogoutButton/>
@@ -161,6 +182,13 @@ const LoggedInContainer = ({children,currentActiveScreen}) =>{
             <Icon icon="ph:repeat" fontSize={25}  className="cursor-pointer text-gray-500 hover:text-white"/>
             </div>
             
+        </div>
+
+        <div className="w-1/4 flex justify-end px-3">
+                <Icon icon="ic:round-playlist-add" fontSize={25} 
+                    className="cursor-pointer text-gray-400 hover:text-white"
+                    onClick={()=>{setAddToPlaylistModalOpen(true);}}
+                />
         </div>
    
         <div className='w-1/4 flex items-center justify-center'></div>
