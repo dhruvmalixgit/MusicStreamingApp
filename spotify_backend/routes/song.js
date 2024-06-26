@@ -22,7 +22,7 @@ router.post("/create",passport.authenticate("jwt",{session:false}),async (req,re
 router.get("/get/mysongs",passport.authenticate("jwt",{session:false}),async (req,res)=>{
    
     //we need to get all songs where artists id == currentuser._id
-    const songs = await Song.find({artist:req.user._id}).populate("artist");
+    const songs = await Song.find().populate("artist");
     return res.status(200).json({data:songs});
 });
 

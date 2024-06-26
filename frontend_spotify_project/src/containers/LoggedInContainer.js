@@ -6,6 +6,7 @@ import { useContext, useState,useRef} from 'react';
 import {Howl, Howler} from 'howler';
 import songContext from '../context/songContext';
 import { useLayoutEffect } from 'react';
+import LogoutButton from '../routes/LogOut';
 
 const LoggedInContainer = ({children,currentActiveScreen}) =>{
 
@@ -124,6 +125,8 @@ const LoggedInContainer = ({children,currentActiveScreen}) =>{
                         <TextWithHover targetLink={"/uploadSong"} displayText={"Upload Song"}/>
                         <div className='bg-white h-2/3 px-8 flex items-center justify-center rounded-full font-semibold cursor-pointer'>DM</div>
                         </div>
+
+                        <LogoutButton/>
                         
                     </div>
                 </div>
