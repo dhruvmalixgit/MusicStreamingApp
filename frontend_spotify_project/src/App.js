@@ -9,6 +9,7 @@ import MyMusic from "./routes/MyMusic";
 import songContext from "./context/songContext";
 import { useState } from "react";
 import SearchPage from "./routes/SearchPage";
+import Library from "./routes/library";
 function App() {
   const[soundPlayed,setSoundPlayed]=useState(null);
   const[isPaused,setIsPaused] = useState(true);
@@ -22,6 +23,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LoggedInHomeComponent/>}/>
         <Route path="/home" element={<LoggedInHomeComponent/>}/>
+        <Route path="/library" element={<Library/>}/>
         <Route path="/uploadSong" element={<UploadSong/>}/>  
         <Route path="/myMusic" element={<MyMusic/>}/>   
         <Route path="/search" element={<SearchPage/>}/>     

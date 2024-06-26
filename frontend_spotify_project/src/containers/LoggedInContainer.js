@@ -103,6 +103,7 @@ const LoggedInContainer = ({children,currentActiveScreen}) =>{
                     <IconText 
                         iconName={"solar:library-linear"}
                         displayText={"Your Library"}
+                        targetLink={"/library"}
                         active={currentActiveScreen==="library"}
                     />
                     <IconText 
@@ -147,11 +148,8 @@ const LoggedInContainer = ({children,currentActiveScreen}) =>{
                         
                         <div className='w-2/5 flex justify-around h-full items-center'>
                         <TextWithHover targetLink={"/uploadSong"} displayText={"Upload Song"}/>
-                        
-                        </div>
-
                         <LogoutButton/>
-                        
+                        </div>
                     </div>
                 </div>
 
@@ -193,8 +191,6 @@ const LoggedInContainer = ({children,currentActiveScreen}) =>{
                     onClick={()=>{setAddToPlaylistModalOpen(true);}}
                 />
         </div>
-   
-        <div className='w-1/4 flex items-center justify-center'></div>
         </div>
      }
      </div>  
