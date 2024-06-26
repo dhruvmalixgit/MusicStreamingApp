@@ -1,7 +1,8 @@
 import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { useContext } from "react";
-import songContext from "../contexts/songContext";
+import songContext from "../context/songContext";
+
 
 const LogoutButton = () => {
     const navigate = useNavigate();
