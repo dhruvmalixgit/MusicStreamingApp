@@ -1,5 +1,5 @@
 import { Icon } from '@iconify/react';
-import { isHtmlElement } from 'react-router-dom';
+import { isHtmlElement, Link } from 'react-router-dom';
 import IconText from '../components/shared/IconText';
 import TextWithHover from '../components/TextWithHover';
 const focusCardsData=[
@@ -86,8 +86,9 @@ const Home = () =>{
                         </div>
                         
                         <div className='w-2/5 flex justify-around h-full items-center'>
-                        <TextWithHover displayText={"Sign Up"}/>
-                        <div className='bg-white h-2/3 px-8 flex items-center justify-center rounded-full font-semibold cursor-pointer'>Log In</div>
+                        <Link to="/signup">
+                        <TextWithHover displayText={"Sign Up"}/></Link>
+                        <div className='bg-white h-2/3 px-8 flex items-center justify-center rounded-full font-semibold cursor-pointer'><Link to="/login">Log In</Link></div>
                         </div>
                         
                     </div>

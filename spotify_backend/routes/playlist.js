@@ -33,6 +33,19 @@ router.get("/get/playlist/:playlistId",passport.authenticate("jwt",{session:fals
     return res.status(200).json(playlist);
 });
 
+router.get(
+    "/get/me",
+    passport.authenticate("jwt", {session: false}),
+    async (req, res) => {
+        const artistId = req.user._id;
+
+        const playlists = await Playlist.find({owner: artistId}).populate(
+            "owner"
+        );
+        return res.status(200).json({data: playlists});
+    }
+);
+
 //get all playlist by an artist;
 
 router.get("/get/artist/:artistId",passport.authenticate("jwt",{session:false}),async (req,res)=>{

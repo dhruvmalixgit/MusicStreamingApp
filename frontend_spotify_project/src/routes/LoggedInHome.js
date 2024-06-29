@@ -1,10 +1,7 @@
-import { Icon } from '@iconify/react';
-import { isHtmlElement } from 'react-router-dom';
-import IconText from '../components/shared/IconText';
-import TextWithHover from '../components/TextWithHover';
-import { useState } from 'react';
-import {Howl, Howler} from 'howler';
+import React, { useEffect,useState, useContext } from 'react';
 import LoggedInContainer from '../containers/LoggedInContainer';
+import { makeAuthenticatedGETRequest } from '../utils/serverHelpers';
+import songContext from '../context/songContext';
 const hipHopCard=[
     {
     title:"Graduation",
@@ -59,14 +56,82 @@ const chillCard=[
         imgUrl:"https://upload.wikimedia.org/wikipedia/commons/e/e7/%22AM%22_%28Arctic_Monkeys%29.jpg"
     }
 ];
-const Home=()=>{
-    return(
-        <LoggedInContainer currentActiveScreen={"home"}>
+// const Home=()=>{
+//     return(
+//         <LoggedInContainer currentActiveScreen={"home"}>
 
-        <PlaylistView titleText={"Hip Hop Mix"} cardsData={hipHopCard}/>
-        <PlaylistView titleText={"Chill Mix"} cardsData={chillCard}/>
+//         <PlaylistView titleText={"Hip Hop Mix"} cardsData={hipHopCard}/>
+//         <PlaylistView titleText={"Chill Mix"} cardsData={chillCard}/>
+
+//         </LoggedInContainer>
+//     )
+// }
+export default function Home(){
+    
+    const [songsData, setSongsData] = useState([]);// array of song objects 
+
+    // we want whenever a user clicks on a single song card, data of that song which we get form 'info' prop, will be saved in the 'currSong' of context 'SongContext' for globally use
+    // one this to note is that in App.js i have already made logged in /myMusic route to access songContext and this 'singleSongCard' is a children of 'mySongs' route so it can also access that songcontext
+    const {currentSong, setCurrentSong} = useContext(songContext); // fetch these 2 values from songContext using hook 'useContext' make sure to use {} and not []
+
+    
+    // fetch all songs from backend
+    useEffect(()=>{
+
+        const getData = async () => {
+            const response = await makeAuthenticatedGETRequest('/song/get/mysongs');
+            setSongsData(response.data);
+        }
+        getData();
+    },[])
+
+    
+
+
+    return(
+        // this below is the repeatitive 'sidebar' 'navbar' 'songBar' code  and inside it is the 'children' prop, (reference : src/containers/LoggedInContainer)
+        <LoggedInContainer curActiveScreen={"home"}>  {/* now why we passed this curActiveScreen = home, bacause now wheverever this component renderes, this value 'home'is passed to the Logged In container.js and there that screen becomes active */}
+            
+            {/* <PlaylistView titleText={"Focus"} cardsData={focusCardsData}/>
+            <PlaylistView titleText={"More Playlists"} cardsData={spotifyCardsPlaylist}/>  */}
+                        
+            {/* updation : */}
+            <div className='text-left font-semibold text-xl py-5'> 
+                Top Songs 
+            </div>
+            <div className='w-full flex flex-wrap items-center justify-left'>
+                {
+                    songsData.map((songObject) => {
+                        return (
+                            <SongCard
+                                songObject={songObject}
+                                setCurrentSong={setCurrentSong}
+                            />
+                        )
+                    })
+                } 
+            </div>
 
         </LoggedInContainer>
+    );
+}
+
+const SongCard = ({songObject, setCurrentSong}) => {
+    return(
+        <div className='p-2 flex-col justify-center items-center w-1/6 cursor-pointer mx-4 my-4' onClick={()=>{
+            setCurrentSong(songObject);
+        }}>
+           
+        
+            <div className='w-full'>
+                <img 
+                    src={songObject.thumbnail}
+                    className='rounded-xl w-full'
+                />
+            </div>
+            <div className='text-gray-300 text-left pt-2 pl-1 font-semibold text'> {songObject.name} </div>
+            <div className='text-gray-500 text-sm text-left pl-1'> {songObject.artist.firstName + " " + songObject.artist.lastName}</div>
+        </div>
     )
 }
 
@@ -103,4 +168,4 @@ const Card = ({ title, description,imageUrl }) => {
         </div>
     );
 };
-export default Home;
+

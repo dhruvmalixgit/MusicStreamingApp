@@ -114,17 +114,17 @@ const LoggedInContainer = ({children,currentActiveScreen}) =>{
                     />
                 </div>
                 <div className='pt-7'>
-                    <IconText 
-                        iconName={"zondicons:add-outline"}
-                        displayText={"Create Playlist"}
-                        onClick={()=>{console.log("open playlist")}}
-                        // onClick={()=>{setCreatePlaylistModalOpen(true)}}
-                    />
-                    <IconText 
-                        iconName={"icon-park-twotone:like"}
-                        displayText={"Liked Songs"}
-                    />
-                </div>
+                            <IconText
+                                iconName={"zondicons:add-outline"}
+                                displayText={"Create Playlist"}
+                                onClick={() => setCreatePlaylistModalOpen(true)}
+                            />
+                            <IconText
+                                iconName={"icon-park-twotone:like"}
+                                onClick={() => alert("Liked Songs clicked")}
+                                displayText={"Liked Songs"}
+                            />
+                        </div>
             </div>
                 <div className='px-5 pb-10'>
                     <div className='border border-gray-100 text-white w-2/5 px-2 py-1 flex rounded-full items-center justify-center hover:boder-white cursor-pointer'>
@@ -199,3 +199,5 @@ const LoggedInContainer = ({children,currentActiveScreen}) =>{
 };
 
 export default LoggedInContainer;
+
+

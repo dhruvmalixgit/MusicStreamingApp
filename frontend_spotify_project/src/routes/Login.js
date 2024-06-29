@@ -11,11 +11,18 @@ const LoginComponent = () =>{
     const[email,setEmail]=useState("");
     const[password,setPassword]=useState("");
     const[cookie,setCookie] = useCookies(["token"]);
+
+    const [displayLoading, setDisplayLoading] = useState(false);
+
+
     const navigate = useNavigate();
     const login= async()=>{
+        setDisplayLoading(true);
         const data = {email,password};
         const response=await makeUnauthenticatedPOSTRequest("/auth/login",data);
+        setDisplayLoading(true);
         if(response && !response.err){
+            setDisplayLoading(false);
             console.log(response);
             const token = response.token;
             const date = new Date();
@@ -26,6 +33,7 @@ const LoginComponent = () =>{
         }
         else{
             alert("failure");
+            setDisplayLoading(false);
         }
     };
     return(
@@ -54,6 +62,20 @@ const LoginComponent = () =>{
                     </div>
                     <div className="my-6 font-semibold text-lg"> Don't have an account?</div>
                     <div className="border border-gray-500 text-gray-500 font-semibold w-full flex items-center justify-center py-4 rounded-full"><Link to="/Signup">SIGN UP FOR SPOTIFY</Link></div>
+                    
+
+                    {
+                        displayLoading?(
+                            <div className='flex justify-center pt-5'>
+                                <Icon icon="line-md:loading-loop"  fontSize={40}/>
+                            </div>
+                        ):(
+                            <div className='flex justify-center pt-5'>
+                                {/* <Icon icon="line-md:loading-loop"  fontSize={40}/> */}
+                            </div>
+                        )
+                    }
+
                     
             </div>   
         </div>

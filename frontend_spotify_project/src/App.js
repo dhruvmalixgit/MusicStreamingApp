@@ -11,6 +11,7 @@ import { useState } from "react";
 import SearchPage from "./routes/SearchPage";
 import Library from "./routes/Library";
 import SinglePlaylistView from "./routes/SinglePlaylistView";
+import Home from "./routes/Home";
 
 
 function App() {
@@ -36,7 +37,9 @@ function App() {
       </songContext.Provider>
     ):(
       <Routes>
+      <Route path="/" element={<Home/>}/>
       <Route path="/login" element={<LoginComponent/>}/>
+      <Route path="/home" element={<Home/>}/>
       <Route path="/signup" element={<SignupComponent/>}/>
       <Route path="*" element={<Navigate to="/login"/>}/>
       </Routes>
