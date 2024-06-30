@@ -96,7 +96,7 @@ export default function Home(){
             <PlaylistView titleText={"More Playlists"} cardsData={spotifyCardsPlaylist}/>  */}
                         
             {/* updation : */}
-            <div className='text-left font-semibold text-xl py-5'> 
+            <div className='text-white text-xl font-semibold pb-4 pl-2 pt-8'> 
                 Top Songs 
             </div>
             <div className='w-full flex flex-wrap items-center justify-left'>

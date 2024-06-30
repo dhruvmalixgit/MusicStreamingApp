@@ -141,13 +141,13 @@ const LoggedInContainer = ({children,currentActiveScreen}) =>{
                     <div className='w-1/2 flex h-full'>
 
                         <div className='w-3/5 flex justify-around items-center'>
-                        <TextWithHover displayText={"Premium"}/>
+                        {/*<TextWithHover displayText={"Premium"}/>
                         <TextWithHover displayText={"Support"}/>
-                        <TextWithHover displayText={"Download"}/>
-                        <div className='h-1/2 border border-white'></div>
+            <TextWithHover displayText={"Download"}/>
+                        <div className='h-1/2 border border-white'></div>*/}
                         </div>
                         
-                        <div className='w-2/5 flex justify-around h-full items-center'>
+                        <div className='w-2/5 flex justify-around h-full items-center '>                        
                         <TextWithHover targetLink={"/uploadSong"} displayText={"Upload Song"}/>
                         <LogoutButton/>
                         </div>
