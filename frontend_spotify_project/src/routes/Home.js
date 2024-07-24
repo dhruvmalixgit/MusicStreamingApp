@@ -2,6 +2,7 @@ import { Icon } from '@iconify/react';
 import { isHtmlElement, Link } from 'react-router-dom';
 import IconText from '../components/shared/IconText';
 import TextWithHover from '../components/TextWithHover';
+import harmonixLogo from "../assets/harmonixLogo.png"
 const focusCardsData=[
     {
     title:"Yandhi",
@@ -35,9 +36,9 @@ const Home = () =>{
             {/*this div will be left pannel*/}
             <div className="h-full w-1/5 bg-black flex flex-col justify-between">
             <div>
-                <div className="logoDiv p-5">
-                    <Icon icon="logos:spotify" width="125"/>
-                </div>
+            <div className="logoDiv p-5 ml-11">
+            <img src={harmonixLogo} alt="Logo" width="125" />
+            </div>
                 <div className='py-5'>
                     <IconText 
                         iconName={"material-symbols:home"}
@@ -88,7 +89,7 @@ const Home = () =>{
                         <div className='w-2/5 flex justify-around h-full items-center'>
                         <Link to="/signup">
                         <TextWithHover displayText={"Sign Up"}/></Link>
-                        <div className='bg-white h-2/3 px-8 flex items-center justify-center rounded-full font-semibold cursor-pointer'><Link to="/login">Log In</Link></div>
+                        <div className='bg-red-600 hover:bg-red-500 h-2/3 px-8 flex items-center justify-center rounded-full font-semibold cursor-pointer'><Link to="/login">Log In</Link></div>
                         </div>
                         
                     </div>

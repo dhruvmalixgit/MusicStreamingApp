@@ -10,6 +10,7 @@ import LogoutButton from '../routes/LogOut';
 import CreatePlaylistModal from '../modals/createPlaylist';
 import AddToPlaylistModal from '../modals/addToPlaylist';
 import { makeAuthenticatedPOSTRequest } from '../utils/serverHelpers';
+import harmonixLogo from '../assets/harmonixLogo.png';
 
 const LoggedInContainer = ({children,currentActiveScreen}) =>{
 
@@ -84,8 +85,8 @@ const LoggedInContainer = ({children,currentActiveScreen}) =>{
             <div className={`${currentSong?"h-9/10":"h-full"} w-full flex`}>
             <div className="h-full w-1/5 bg-black flex flex-col justify-between">
             <div>
-                <div className="logoDiv p-5">
-                    <Icon icon="logos:spotify" width="125"/>
+                <div className="logoDiv p-5 ml-11">
+                    <img src={harmonixLogo} alt="Logo" width="125" />
                 </div>
                 <div className='py-5'>
                     <IconText 
